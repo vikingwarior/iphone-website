@@ -1,8 +1,13 @@
-import { useEffect, useRef, useState } from "react";
-import { hightlightsSlides } from "../constants";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+
+import { useEffect, useRef, useState } from "react";
+import { useGSAP } from "@gsap/react";
+
+import { hightlightsSlides } from "../constants";
 import { pauseImg, playImg, replayImg } from "../utils";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const VideoCarousel = () => {
   const videoRef = useRef([]);
@@ -34,6 +39,10 @@ const VideoCarousel = () => {
         break;
 
       case "play":
+        setVideo((prev) => ({ ...prev, isPlaying: !prev.isPlaying }));
+        break;
+
+      case "pause":
         setVideo((prev) => ({ ...prev, isPlaying: !prev.isPlaying }));
         break;
 
