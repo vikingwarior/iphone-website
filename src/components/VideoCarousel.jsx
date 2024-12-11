@@ -19,26 +19,10 @@ const VideoCarousel = () => {
 
   const [loadedData, setLoadedData] = useState([]);
 
-  useGSAP(() => {
-    gsap.to("#video", {
-      scrollTrigger: {
-        trigger: "#video",
-        toggleActions: "restart none none none",
-      },
-      onComplete: () => {
-        setVideo((prev) => ({
-          ...prev,
-          startPlay: true,
-          isPlaying: true,
-        }));
-      },
-    });
-  });
-
   const handleProcess = (process, index) => {
     switch (process) {
       case "video-end":
-        setVideo((prev) => ({ ...prev, isEnd: true, videoId: ++index }));
+        setVideo((prev) => ({ ...prev, isEnd: true, videoId: index++ }));
         break;
 
       case "video-last":
@@ -61,6 +45,30 @@ const VideoCarousel = () => {
   const handleLoadedMetadata = (index, event) => setLoadedData(prev => [...prev, event])
 
   const { isEnd, startPlay, videoId, isLastVideo, isPlaying } = video;
+
+  useGSAP(() => {
+    // slider animation to move the video out of the screen and bring the next video in
+    gsap.to("#slider", {
+      transform: `translateX(${-100 * videoId}%)`,
+      duration: 2,
+      ease: "power2.inOut", // show visualizer https://gsap.com/docs/v3/Eases
+    });
+
+    // video animation to play the video when it is in the view
+    gsap.to("#video", {
+      scrollTrigger: {
+        trigger: "#video",
+        toggleActions: "restart none none none",
+      },
+      onComplete: () => {
+        setVideo((pre) => ({
+          ...pre,
+          startPlay: true,
+          isPlaying: true,
+        }));
+      },
+    });
+  }, [isEnd, videoId]);
 
   useEffect(() => {
     let currentProgress = 0;
@@ -159,6 +167,11 @@ const VideoCarousel = () => {
                     }));
                   }}
                   onLoadedMetadata={event => handleLoadedMetadata(index, event)}
+                  onEnded={event => {
+                    index !== 3
+                      ? handleProcess("video-end", index)
+                      : handleProcess("video-last")
+                  }}
                 >
                   <source src={video} type="video/mp4" />
                 </video>
