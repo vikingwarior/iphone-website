@@ -4,11 +4,13 @@ import gsap from "gsap";
 import ModelView from "./ModelView";
 
 import { useGSAP } from "@gsap/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { ScrollTrigger } from "gsap/all";
 import { Canvas } from "@react-three/fiber";
 import { View } from "@react-three/drei";
+
+import { animateWithGsapTimeline } from "../utils/animatons";
 
 import { yellowImg } from "../utils";
 import { models, sizes } from "../constants";
@@ -44,6 +46,24 @@ const Model = () => {
   //rotation of models
   const [smallRotation, setSmallRotation] = useState(0);
   const [largeRotation, setLargeRotation] = useState(0);
+
+  const tl = gsap.timeline();
+
+  useEffect(() => {
+    if(size === 'large') {
+      animateWithGsapTimeline(tl, small, smallRotation, '#view1', '#view2', {
+        transform: 'translateX(-100%)',
+        duration: 2
+      })
+    }
+
+    if(size ==='small') {
+      animateWithGsapTimeline(tl, large, largeRotation, '#view2', '#view1', {
+        transform: 'translateX(0)',
+        duration: 2
+      })
+    }
+  }, [size])
 
   return (
     <section className="common-padding">
