@@ -79,9 +79,8 @@ export const sizes = [
 ];
 
 export const footerLinks = [
-  "Privacy Policy",
-  "Terms of Use",
-  "Sales Policy",
-  "Legal",
-  "Site Map",
+  {url: "https://github.com/vikingwarior/iphone-website", displayText: "Repo Link"},
+  {url: "https://www.linkedin.com/in/harshparadkar/", displayText: "LinkedIn"},
+  {url: "https://github.com/vikingwarior", displayText: "GitHub"},
+  {url: "mailto:harsh.paradkar@outlook.com", displayText: "Email"},
 ];

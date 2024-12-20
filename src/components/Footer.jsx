@@ -18,22 +18,24 @@ const Footer = () => {
             near you.
           </p>
           <p className="font-semibold text-gray text-xs">
-            Or call 000800-040-1966
+            Or email to: <a className="underline text-blue" href="mailto:harsh.paradkar@outlook.com">harsh.paradkar@outlook.com</a>
           </p>
         </div>
 
         <div className="bg-neutral-700 my-5 h-[1px] w-full" />
 
         <div className="flex md:flex-row flex-col md:items-center justify-between">
-          <p className="font-semibold text-gray text-xs">Copright @ Harsh Paradkar. All rights reserved.</p>
+          <p className="font-semibold text-gray text-xs">Developed By: Harsh Paradkar. No rights reserved.</p>
           <div className="flex">
-            {footerLinks.map((link, i) => (
-              <p key={link} className="font-semibold text-gray text-xs">
-                {link}{' '}
-                {i !== footerLinks.length - 1 && (
-                  <span className="mx-2"> | </span>
-                )}
-              </p>
+            {footerLinks.map(({url, displayText}, i) => (
+              <a href={url}>
+                <p key={displayText} className="font-semibold text-gray text-xs">
+                  {displayText}{' '}
+                  {i !== footerLinks.length - 1 && (
+                    <span className="mx-2"> | </span>
+                  )}
+                </p>
+              </a >
             ))}
           </div>
         </div>
