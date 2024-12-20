@@ -10,7 +10,7 @@ import { ScrollTrigger } from "gsap/all";
 import { Canvas } from "@react-three/fiber";
 import { View } from "@react-three/drei";
 
-import { animateWithGsapTimeline } from "../utils/animatons";
+import { animateWithGsapTimeline } from "../utils/animations";
 
 import { yellowImg } from "../utils";
 import { models, sizes } from "../constants";
