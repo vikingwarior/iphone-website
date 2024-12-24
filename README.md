@@ -2,7 +2,7 @@
 
 The project is live at: https://iphone-product-page-clone.netlify.app/
 
-To see the website in action:
+To see the website on your localhost:
 - clone repo
 - open git/terminal in project folder
 - run "npm i" command
